@@ -23,11 +23,11 @@ type Configuration struct {
 }
 
 func cat(path string) *os.File {
-    File, err := os.Open(path)
-    if err != nil {
-        fmt.Println(err)
-    }
-    return File
+	File, err := os.Open(path)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return File
 }
 
 func ls(path string) error {
@@ -58,31 +58,31 @@ func logerror(logerror error) {
 	defer f.Close()
 
 	logger := log.New(f, "[ERROR] [ ", log.LstdFlags)
-	logger.Println("]:",logerror)
+	logger.Println("]:", logerror)
 }
 
-func ipoverflow(code,status string) {
+func ipoverflow(code, status string) {
 	//filter multiple code//
 
 	if isEmptyString(code) == false {
-		for _, chk := range strings.Split(code,",") {
+		for _, chk := range strings.Split(code, ",") {
 			if status == chk {
 				tcode = 1
 			}
 		}
 	}
 
-
 }
 
 var configuration Configuration
 var tcode int
+
 func main() {
 
-    yamlFile := cat("C:/Users/Greypanel-kingsley/go/src/cc_defence/conf.yaml")
+	yamlFile := cat("/usr/local/cc_defence/conf.yaml")
 
-    //get all configuration content//
-    byteValue, _ := ioutil.ReadAll(yamlFile)
+	//get all configuration content//
+	byteValue, _ := ioutil.ReadAll(yamlFile)
 	_ = yaml.Unmarshal(byteValue, &configuration)
 	_ = yamlFile.Close()
 
@@ -91,9 +91,8 @@ func main() {
 	status := "400"
 
 	//Main Function//
-	fmt.Println(ls("C:/Users/Greypanel-kingsley/go/src/"))
+	fmt.Println(ls("/usr/local/greycdn/logs/g*.log"))
 
-
-	ipoverflow(code,status)
+	ipoverflow(code, status)
 	fmt.Println(tcode)
 }
